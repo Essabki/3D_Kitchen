@@ -1,4 +1,4 @@
-# 🏠 3D Kitchen Scene (Three.js)
+# 🏠 3D Kitchen Animation Scene (Three.js)
 
 A interactive 3D kitchen scene built using **Three.js**.  
 This project includes animated kitchen objects like a desk, refrigerator, faucet (water effect), and other environment elements.
