@@ -30,4 +30,4 @@ This project includes animated kitchen objects like a desk, refrigerator, faucet
 To get a local copy of this project, run:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+https://github.com/Essabki/3D_Kitchen-.git
