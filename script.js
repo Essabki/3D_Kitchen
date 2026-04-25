@@ -158,6 +158,42 @@ kitchen_sink.rotation.y = Math.PI * 1.5; // more to the left
     Water_tap.add(kitchen_sink);
 });
 
+// tree
+const loadertree = new THREE.GLTFLoader();
+
+loadertree.load('./tree.glb', (gltf) => {
+    const tree = gltf.scene;
+    
+    // Scale tree (adjust as needed)
+    tree.scale.set(0.45, 0.45, 0.45);
+    
+    // Put tree ON TOP of desk
+    tree.position.set(
+        desk.position.x,
+        desk.position.y + (desk.scale.y * 0.5) + (tree.scale.y * 0.5),
+        desk.position.z
+    );
+    tree.position.set(-5.9, 0.4, -1.3);  
+    scene.add(tree);
+    
+}, undefined, (error) => {
+    console.error('Tree load failed:', error);
+});
+
+//kettle
+const loaderkettle = new THREE.GLTFLoader();
+
+loaderkettle.load('./kettle.glb', (gltf) => {
+    const kettle = gltf.scene;
+    // Scale kettle (adjust as needed)
+    kettle.scale.set(0.25, 0.25, 0.25);
+
+    // Put kettle ON TOP of desk
+    kettle.position.set(1.6, 0, -1);
+ 
+    scene.add(kettle);
+});
+
 // Water tap floor pieces
 const Water_tap_floor_left_geometry = new THREE.BoxGeometry(2.50,0.02,2);
 const Water_tap_floor_left_material = new THREE.MeshStandardMaterial({color:0x777777});
@@ -495,7 +531,7 @@ freezerSeal.position.set(0, -1, 0.01);
 //freezerDoor.add(freezerSeal); 
 
 // POSITION THE ENTIRE FRIDGE
-fridge.position.set(4.7, 1,-1 );
+fridge.position.set(4.7, 1,-1.2 );
 fridge.scale.set(0.8, 0.8, 0.8);
 
 desk.position.set(-1, 0, -1); // Move anywhere!
@@ -615,9 +651,7 @@ cooktop.position.set(-5.7, 0, 3.58);
 cooktop.scale.set(0.8, 1, 1);
  cooktop.rotation.y = Math.PI / 2;
 
-// Oven
-//==========================
-// =========================
+
 // 🔥 OVEN - COMPLETE WITH DOOR + HANDLE
 // =========================
 
@@ -751,12 +785,6 @@ scene.add(ovenGroup);
 
 ovenGroup.position.set(-5.8,-1.43, 3.5);
 ovenGroup.scale.set(1.2, 1.35, 1.1);
-
-
-// =========================
-// 📏 AXES
-// =========================
-//scene.add(new THREE.AxesHelper(4));
 
 
 // =========================
@@ -917,3 +945,4 @@ window.addEventListener("resize",()=>{
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth,window.innerHeight);
 });
+
