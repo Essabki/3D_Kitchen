@@ -1,27 +1,42 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 // Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x001122);
 
 // Camera
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 8, 8);
-        camera.lookAt(0, 0, 0);
+const camera = new THREE.PerspectiveCamera(65, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(15, 10, 15);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;  
+renderer.toneMappingExposure = 1.2;                  
 document.body.appendChild(renderer.domElement);
 
-
 // Controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.zoomToCursor = true;
+controls.enablePan = true;
+controls.screenSpacePanning = true;
+controls.minDistance = 2;
+controls.maxDistance = 50;
+controls.maxPolarAngle = Math.PI / 2;
+controls.target.set(0, 3, 0);
+controls.update();
 
-// Light
-scene.add(new THREE.AmbientLight(0xffffff, 1));
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(3,10,5);
-scene.add(light);
-//===============================================================================================
+
+// 💡 LIGHTS - FIXED SYNTAX!
+scene.add(new THREE.AmbientLight(0xffffff, 2.6));
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.8);
+mainLight.position.set(3, 10, 5);
+scene.add(mainLight);
+
+
 
 // =========================
 // 🟤 FLOOR + BACK WALL
@@ -42,13 +57,12 @@ scene.add(floor);
 const backWallGeometry = new THREE.PlaneGeometry(15, 8);
 const backWallMaterial = new THREE.MeshStandardMaterial({ 
     color: 0x7a4a1e                                                
-     
 });
 const backWall = new THREE.Mesh(backWallGeometry, backWallMaterial);
 backWall.position.set(0, 0.8, -2.1);
 scene.add(backWall);
-// =========================
-// 🟤 KITCHEN DESK - ALL IN ONE GROUP
+
+
 // =========================
 const desk = new THREE.Group();
 
@@ -140,6 +154,7 @@ Water_tap.rotation.x = Math.PI / -2;
 
 desk.add(Water_tap);
 
+/*
 const loader = new THREE.GLTFLoader();
 
 let kitchen_sink;
@@ -157,15 +172,16 @@ kitchen_sink.rotation.y = Math.PI * 1.5; // more to the left
     kitchen_sink.position.set(0, 0, 0.6);
     Water_tap.add(kitchen_sink);
 });
-
+*/
 // tree
-const loadertree = new THREE.GLTFLoader();
+
+const loadertree = new GLTFLoader();
 
 loadertree.load('./tree.glb', (gltf) => {
     const tree = gltf.scene;
     
     // Scale tree (adjust as needed)
-    tree.scale.set(0.45, 0.45, 0.45);
+    tree.scale.set(0.35, 0.35, 0.35);
     
     // Put tree ON TOP of desk
     tree.position.set(
@@ -181,18 +197,34 @@ loadertree.load('./tree.glb', (gltf) => {
 });
 
 //kettle
-const loaderkettle = new THREE.GLTFLoader();
+const loaderkettle = new GLTFLoader();
 
 loaderkettle.load('./kettle.glb', (gltf) => {
     const kettle = gltf.scene;
     // Scale kettle (adjust as needed)
-    kettle.scale.set(0.25, 0.25, 0.25);
+    kettle.scale.set(0.05, 0.05, 0.05);
 
     // Put kettle ON TOP of desk
-    kettle.position.set(1.6, 0, -1);
+    kettle.position.set(-6, 0, 1);
  
     scene.add(kettle);
 });
+
+
+//skin
+const loaderskin = new GLTFLoader();
+
+loaderskin.load('./kitchen_sink.glb', (gltf) => {
+    const skin = gltf.scene;
+    // Scale skin (adjust as needed)
+    skin.scale.set(3, 3, 2.6);
+
+    // Put skin ON TOP of desk
+    skin.position.set(-1, 0.1, -1);
+ 
+    scene.add(skin);
+});
+
 
 // Water tap floor pieces
 const Water_tap_floor_left_geometry = new THREE.BoxGeometry(2.50,0.02,2);
@@ -652,6 +684,9 @@ cooktop.scale.set(0.8, 1, 1);
  cooktop.rotation.y = Math.PI / 2;
 
 
+
+
+
 // 🔥 OVEN - COMPLETE WITH DOOR + HANDLE
 // =========================
 
@@ -659,7 +694,7 @@ cooktop.scale.set(0.8, 1, 1);
 const ovenGroup = new THREE.Group();
 
 // 🏮 OVEN LIGHT
-const ovenLight = new THREE.PointLight(0xffaa33, 0.3, 10);
+const ovenLight = new THREE.PointLight(0xffaa33, 1.5, 10);
 ovenLight.position.set(0, 0, 0.5);
 ovenGroup.add(ovenLight);
 
@@ -787,6 +822,7 @@ ovenGroup.position.set(-5.8,-1.43, 3.5);
 ovenGroup.scale.set(1.2, 1.35, 1.1);
 
 
+
 // =========================
 // CLICK DETECTION - FULL (ALL SYSTEMS)
 // =========================
@@ -856,13 +892,13 @@ window.addEventListener("click", (e) => {
         flames2.visible = burner2On;
     }
 });
-// ANIMATION - FULL SYSTEM
-// =========================
 
+
+// 🔥 ANIMATION LOOP (REQUIRED)
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
-
+    
     // =========================
     // 🟤 DESK
     // =========================
@@ -875,19 +911,19 @@ function animate() {
     freezerDoorPivot.rotation.y += ((freezerOpen ? Math.PI/2 : 0) - freezerDoorPivot.rotation.y) * 0.05;
     mainFridgeDoorPivot.rotation.y += ((mainFridgeOpen ? Math.PI/2 : 0) - mainFridgeDoorPivot.rotation.y) * 0.05;
 
-    freezerLamp1.intensity = freezerOpen ? 0.8 : 0;
-    fridgeLamp2.intensity = mainFridgeOpen ? 0.8 : 0;
+    freezerLamp1.intensity = freezerOpen ? 5 : 0;
+    fridgeLamp2.intensity = mainFridgeOpen ? 5 : 0;
 
     freezerBulb1.material.emissiveIntensity = freezerOpen ? 2 : 0;
     fridgeBulb2.material.emissiveIntensity = mainFridgeOpen ? 2 : 0;
 
-    pullOutShelf.position.z += ((shelfOpen ? 2 : 0) - pullOutShelf.position.z) * 0.08;
+    pullOutShelf.position.z += ((shelfOpen ? 1.5 : 0) - pullOutShelf.position.z) * 0.08;
 
     // =========================
     // 🔥 OVEN
     // =========================
     ovenDoorPivot.rotation.x += ((ovenOpen ? Math.PI/2 : 0) - ovenDoorPivot.rotation.x) * 0.1;
-    ovenLight.intensity += ((ovenOpen ? 2 : 0) - ovenLight.intensity) * 0.1;
+    ovenLight.intensity += ((ovenOpen ? 50 : 0) - ovenLight.intensity) * 0.1;
 
     if (ovenOpen && Math.random() < 0.3) spawnSmoke();
 
@@ -934,15 +970,14 @@ function animate() {
             f.material.color.setRGB(0, 0.6 + Math.random() * 0.4, 1);
         });
     }
-
+    
     renderer.render(scene, camera);
 }
-
 animate();
+
 // RESIZE
 window.addEventListener("resize",()=>{
     camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth,window.innerHeight);
 });
-

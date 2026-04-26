@@ -5,16 +5,22 @@
 <title>kitchen</title>
 <style>
 body { margin:0; overflow:hidden; background:black;}
-
 </style>
 </head>
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<!-- ✅ IMPORT MAP (ONLY JSON) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+  }
+}
+</script>
 
-<script src="script.js"></script>
+<!-- ✅ LOAD YOUR JS FILE -->
+<script type="module" src="./script.js"></script>
 
 </body>
 </html>
