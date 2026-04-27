@@ -2,7 +2,7 @@
 
 An interactive 3D kitchen built with **Three.js**, featuring clickable objects, animated doors, lighting, fire effects, and smoke simulation. 
 
----
+
 <img width="1398" height="875" alt="2" src="https://github.com/user-attachments/assets/e7dc9afe-d3d9-404c-be44-835c487d37ef" />
 
 
@@ -75,5 +75,42 @@ An interactive 3D kitchen built with **Three.js**, featuring clickable objects, 
 
 
 ## 📦 Project Structure
+```
+/project
+├── index.html
+├── script.js
+└── /models
+└── img.glb
+```
+git clone
 ```bash
 https://github.com/Essabki/3D_Kitchen-.git
+```
+
+- Everything else is handled inside `script.js`
+## ⚙️ How It Works
+- All logic is inside **script.js**
+- Uses **Three.js GLTFLoader** to load `.glb` model
+- Raycasting handles click detection
+- Doors and objects use rotation animations
+- Effects (fire/smoke) are triggered by interaction states
+
+---
+
+## 🚀 How to Run
+1. Open `index.html`
+2. Make sure you use a local server (important for GLB loading):
+ - VS Code Live Server OR
+ - Python server:
+   ```
+   python -m http.server
+   ```
+## ⚠️ Important Notes
+- `.glb` files will NOT load properly without a server (CORS issue)
+- Keep `img.glb` path correct in `script.js`
+- Everything is controlled from a single script file
+
+
+
+## 👨‍💻 by Essabki
+Built for learning interactive 3D web development with Three.js.
