@@ -6,6 +6,10 @@ https://essabki.github.io/3D_Kitchen/
 <img width="1398" height="875" alt="2" src="https://github.com/user-attachments/assets/e7dc9afe-d3d9-404c-be44-835c487d37ef" />
 
 
+
+https://github.com/user-attachments/assets/6fa7b548-64f2-4c60-bbe7-952f64daed2d
+
+
 ### 🕹️ Controls
 - Mouse camera movement (Orbit / FPS style depending on setup)
 - Click interactions on objects
