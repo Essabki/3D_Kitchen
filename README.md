@@ -1,35 +1,79 @@
-# 🏠 3D Kitchen Animation Scene (Three.js)
+#  Interactive 3D Kitchen
 
-A interactive 3D kitchen scene built using **Three.js**.  
-This project includes animated kitchen objects like a desk, refrigerator, faucet (water effect), and other environment elements.
+An interactive 3D kitchen built with **Three.js**, featuring clickable objects, animated doors, lighting, fire effects, and smoke simulation. 
 
 ---
 <img width="1398" height="875" alt="2" src="https://github.com/user-attachments/assets/e7dc9afe-d3d9-404c-be44-835c487d37ef" />
 
 
-## 🚀 Features
+### 🕹️ Controls
+- Mouse camera movement (Orbit / FPS style depending on setup)
+- Click interactions on objects
+- Smooth animations for doors, lids, and appliances
 
-- 🧊 3D kitchen environment (desk, floor, wall)
-- ❄️ Refrigerator model (replaceable / customizable)
-- 🚰 Faucet with water animation
-- 🔲 Basic geometric modeling (cubes, boxes, etc.)
-- 🎮 Interactive elements (click-based animations)
-- 🌗 Lighting system (ambient + directional light)
-- 🎥 Camera controls for scene navigation
 
----
+## 🏠 Kitchen Components
 
-## 🛠️ Built With
+### 🚪 Water Sink Desk
+- Modern sink desk model
+- 2 animated doors (open/close with click)
+- “Class-based” structure for easy expansion
+- Water sink element integrated into the desk
 
-- HTML5
-- JavaScript (ES6)
-- Three.js
 
----
 
-## 📥 Clone the Project
+### 💰 Treasury Cabinet
+- Large storage unit
+- 4 interactive doors
+- Click to open/close each door individually
+- Organized grouped structure for performance
 
-To get a local copy of this project, run:
 
+
+### ❄️ Refrigerator System
+- Main fridge with separate freezer section
+- 2 clickable “lumps” (interactive handles/buttons)
+- Internal shelf structure
+- Smooth open/close animation
+
+
+
+### 🔥 Cooking Table
+- Gas cooktop integrated into table
+- Oven placed underneath
+- Realistic kitchen layout design
+
+
+
+### 🔥 Gas Cooktop
+- Active fire simulation
+- Toggle fire on/off
+- Visual flame effect for cooking experience
+
+
+
+### 🍞 Oven System
+- Clickable oven door (lump interaction)
+- Internal smoke effect when active
+- Realistic heating / cooking simulation feel
+
+
+
+## 💨 Effects
+- Fire particles for gas cooktop
+- Smoke system for oven
+- Smooth transitions and animations
+
+
+
+## 🧠 Tech Stack
+- Three.js (3D rendering)
+- JavaScript (logic & interactions)
+- HTML5 / CSS (structure & styling)
+- Raycasting (click detection)
+
+
+
+## 📦 Project Structure
 ```bash
 https://github.com/Essabki/3D_Kitchen-.git
