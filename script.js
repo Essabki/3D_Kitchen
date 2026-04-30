@@ -530,7 +530,7 @@ const cooktop = new THREE.Group();
 scene.add(cooktop);
 
 const cookBase = new THREE.Mesh(
-    new THREE.BoxGeometry(4.5, 0.2, 2),
+    new THREE.BoxGeometry(4.5, 0.1, 2),
     new THREE.MeshStandardMaterial({ color: 0x222222 })
 );
 cooktop.add(cookBase);
@@ -539,14 +539,14 @@ const burner1 = new THREE.Mesh(
     new THREE.CylinderGeometry(0.6, 0.6, 0.1, 32),
     new THREE.MeshStandardMaterial({ color: 0x111111 })
 );
-burner1.position.set(-1.2, 0.15, 0);
+burner1.position.set(-1.2, 0.10, 0);
 cooktop.add(burner1);
 
 const burnerCap1 = new THREE.Mesh(
     new THREE.CylinderGeometry(0.3, 0.3, 0.15, 32),
     new THREE.MeshStandardMaterial({ color: 0x333333 })
 );
-burnerCap1.position.set(-1.2, 0.25, 0);
+burnerCap1.position.set(-1.2, 0.20, 0);
 cooktop.add(burnerCap1);
 
 const flames1 = new THREE.Group();
@@ -572,14 +572,14 @@ const burner2 = new THREE.Mesh(
     new THREE.CylinderGeometry(0.6, 0.6, 0.1, 32),
     new THREE.MeshStandardMaterial({ color: 0x111111 })
 );
-burner2.position.set(1.2, 0.15, 0);
+burner2.position.set(1.2, 0.10, 0);
 cooktop.add(burner2);
 
 const burnerCap2 = new THREE.Mesh(
     new THREE.CylinderGeometry(0.3, 0.3, 0.15, 32),
     new THREE.MeshStandardMaterial({ color: 0x333333 })
 );
-burnerCap2.position.set(1.2, 0.25, 0);
+burnerCap2.position.set(1.2, 0.20, 0);
 cooktop.add(burnerCap2);
 
 const flames2 = new THREE.Group();
@@ -603,7 +603,7 @@ for(let i = 0; i < 12; i++){
 
 flames1.visible = false;
 flames2.visible = false;
-cooktop.position.set(-5.7, 0, 3.58);
+cooktop.position.set(-5.7, 0.06, 3.58);
 cooktop.scale.set(0.8, 1, 1);
 cooktop.rotation.y = Math.PI / 2;
 
@@ -841,7 +841,7 @@ function animate() {
     requestAnimationFrame(animate);
     controls.update();
     
-    // 🔥 TREASURY ANIMATION - NEW!
+    // 🔥 wall cabinet  ANIMATION - NEW!
     allTreasuries.forEach(t => {
         const target = t.open ? Math.PI/2 : 0;
         t.pivot.rotation.x += (target - t.pivot.rotation.x) * 0.1;
@@ -885,17 +885,17 @@ function animate() {
     // 🔥 BURNERS
     if (burner1On) {
         flames1.children.forEach(f => {
-            f.scale.y = 1 + Math.random() * 0.5;
+            f.scale.y = 0.5 + Math.random() * 0.5;
             f.position.y = 0.35 + Math.random() * 0.03;
-            f.material.emissiveIntensity = 2;
+            f.material.emissiveIntensity = -2;
             f.material.color.setRGB(0, 0.6 + Math.random() * 0.4, 1);
         });
     }
     if (burner2On) {
         flames2.children.forEach(f => {
-            f.scale.y = 1 + Math.random() * 0.5;
+            f.scale.y = 0.5 + Math.random() * 0.5;
             f.position.y = 0.35 + Math.random() * 0.03;
-            f.material.emissiveIntensity = 2;
+            f.material.emissiveIntensity = -2;
             f.material.color.setRGB(0, 0.6 + Math.random() * 0.4, 1);
         });
     }
